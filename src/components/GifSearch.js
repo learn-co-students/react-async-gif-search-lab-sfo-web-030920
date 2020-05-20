@@ -11,11 +11,14 @@ export default class GifSearch extends Component {
     });
   };
 
+  handleSubmit = (e) => {
+    e.preventDefault();
+    this.props.fetchGifs(this.state.searchInput);
+  };
+
   render() {
     return (
-      <form
-        onSubmit={(e) => this.props.handleSubmit(e, this.state.searchInput)}
-      >
+      <form onSubmit={(e) => this.handleSubmit(e)}>
         <input
           type="text"
           value={this.state.searchInput}

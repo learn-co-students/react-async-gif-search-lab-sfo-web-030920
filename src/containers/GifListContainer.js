@@ -6,16 +6,9 @@ import GifSearch from "../components/GifSearch";
 class GifListContainer extends Component {
   state = {
     images: [],
-    searchInput: "",
   };
 
-  handleSubmit = (e, searchInput) => {
-    e.preventDefault();
-
-    this.fetchGifs(searchInput);
-  };
-
-  fetchGifs = (search) => {
+  fetchGifs = (search = "dolphins") => {
     fetch(
       `https://api.giphy.com/v1/gifs/search?q=${search}&api_key=dc6zaTOxFJmzC&rating=g`
     )
@@ -32,14 +25,14 @@ class GifListContainer extends Component {
   };
 
   componentDidMount() {
-    this.fetchGifs("dolphins");
+    this.fetchGifs();
   }
 
   render() {
     return (
       <div>
         <GifList images={this.state.images} />
-        <GifSearch handleSubmit={this.handleSubmit} />
+        <GifSearch fetchGifs={this.fetchGifs} />
       </div>
     );
   }
